@@ -1,0 +1,95 @@
+h1{
+  margin-top: 50px;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/*Modal Add Task*/
+
+.modalNewTask{
+  font-family: 'Noto Sans', sans-serif;
+  border: solid 3px black;
+  background-color: white;
+  margin-top: 50px;
+  width: 60%;
+  padding-bottom: 3000px;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 20px;
+  padding: 20px 0px 20px 0px; 
+}
+
+h2{
+  text-align: center;
+  padding: 0px 0px 20px 0px; 
+}
+
+input{
+  border: solid 2px black;
+  border-radius: 8px;
+  margin-left: 20px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20px;
+}
+
+::placeholder{
+  padding-left: 5px;
+  font-weight: 600;
+}
+
+#important{
+  width: 10px;
+  margin-right: 1%;
+}
+#labelImportant{
+  font-weight: 600;
+}
+
+.buttonModal{
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 18px;
+  padding: 5px 0px 5px 0px;
+  margin-top: 10px;
+  outline: none;
+}
+
+.buttonModal:hover{
+  border-color: black;
+  background-color: white;
+  color: black;
+}
+
+/*Div Tasks*/
+.tasks{
+  font-size: 10px;
+  margin-top: 30px;
+  background-color: black;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 20px;
+  padding: 20px 0px 1px 0px;
+}
+
+.tasks li{
+  font-family: 'Noto Sans', sans-serif;
+  list-style: none;
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 20px;
+  padding: 10px 0px 3px 10px;
+}

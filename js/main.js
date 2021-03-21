@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('input').forEach( node => node.addEventListener('keypress', e => {
+    if(e.keyCode == 13) {
+      takeData();
+      e.preventDefault();
+    };
+  }))
   const buttonAddTask = document.querySelector("#buttonTask");
   buttonAddTask.addEventListener("click", takeData);
   let taskListPending = [];
@@ -45,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (taskDone){
           taskListPending = taskListPending.filter((i) => i !== newTask);
           pendingAmount.textContent = taskListPending.length;
-          console.log(taskListPending);
         };
       };
 

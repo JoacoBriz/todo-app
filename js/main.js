@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       //New Task
       let taskLi = document.querySelector("#taskLi");
-      taskLi.innerHTML += templateTask;
+      taskLi.insertAdjacentHTML("beforeend", templateTask);
 
       //Task item List
       var newTask = document.querySelector("#tasks");
@@ -33,17 +33,23 @@ document.addEventListener("DOMContentLoaded", function() {
       //Add button in task item
       newTask.appendChild(buttonTaskDone);
 
+      //Pending Task amount
+      let pendingAmount = document.querySelector("#amountPending");
+      taskListPending.push(newTask);
+      pendingAmount.textContent = taskListPending.length;
+
       //Delete Task
       function taskDone() {
         console.log(id);
         taskLi.removeChild(newTask);
-      }
+        if (taskDone){
+          taskListPending = taskListPending.filter((i) => i !== newTask);
+          pendingAmount.textContent = taskListPending.length;
+          console.log(taskListPending);
+        };
+      };
 
-      //Pending Task amount
-      let pendingAmount = document.querySelector("#amountPending");
-      taskListPending.push(titleTask);
-      pendingAmount.innerHTML = taskListPending.length;
-    }
+    };
   };
 });
 

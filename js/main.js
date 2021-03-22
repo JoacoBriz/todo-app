@@ -53,11 +53,12 @@ document.addEventListener("DOMContentLoaded", function() {
           taskListPending = taskListPending.filter((i) => i !== newTask);
           pendingAmount.textContent = taskListPending.length;
           showTaskDone();
+          document.querySelector("#doneTasks").style.display = "block";
         };
 
         //Move Task to Done Section
         function showTaskDone() {
-          // let id = 0;
+          let id = 0;
           let templateTaskDone = `
           <li id="taskDone" class="task">
             <p class="title">${titleTask}</p>
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
           // Task Done Item
           let newTaskDone = document.querySelector("#taskDone");
-          // taskDone.setAttribute("id", id++);
+          newTaskDone.setAttribute("id", id++);
 
           //Button Delete
           const buttonTaskDelete = document.createElement("button");

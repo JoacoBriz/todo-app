@@ -1,14 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
+  //Button Enter On
   document.querySelectorAll('input').forEach( node => node.addEventListener('keypress', e => {
     if(e.keyCode == 13) {
       takeData();
       e.preventDefault();
     };
   }))
+
   const buttonAddTask = document.querySelector("#buttonTask");
   buttonAddTask.addEventListener("click", takeData);
   let taskListPending = [];
-  let id = 1;
+  let id = 0;
 
   function takeData () {
     let titleTask = document.querySelector("#titleTask").value;
@@ -46,13 +48,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
       //Delete Task
       function taskDone() {
-        console.log(id);
         taskLi.removeChild(newTask);
+
         if (taskDone){
           taskListPending = taskListPending.filter((i) => i !== newTask);
           pendingAmount.textContent = taskListPending.length;
+          showTaskDone();
+        };
+
+        //Move Task to Done Section
+        function showTaskDone() {
+          let taskLiDone = document.querySelector("#doneTasks");
+          taskLiDone.insertAdjacentHTML("beforeend", templateTask);
+
+          //Task item List
+          var taskDone = document.querySelector("#tasks");
+          taskDone.setAttribute("id", id++);
+
+          //Button Remove
+          const buttonTaskRemove = document.createElement("button");
+          buttonTaskRemove.classList.add('removeButton');
+          buttonTaskRemove.innerHTML = '<i class="far fa-trash-alt"></i>';
+          buttonTaskRemove.addEventListener("click", taskRemove);
+
+          taskDone.appendChild(buttonTaskRemove);
+
+          function taskRemove() {
+            taskLiDone.removeChild(taskDone);
+          };
+
+          //Button Return
+          const buttonTaskReturn = document.createElement("button");
+          buttonTaskReturn.classList.add('removeButton');
+          buttonTaskReturn.innerHTML = '<i class="fas fa-undo-alt"></i>';
+          buttonTaskReturn.addEventListener("click", taskReturn);
+
+          taskDone.appendChild(buttonTaskReturn);
+
+          //Return Task to Pending Section
+          function taskReturn() {
+            taskLiDone.removeChild(taskDone);
+            let taskLi = document.querySelector("#taskLi");
+            taskLi.insertAdjacentHTML("beforeend", templateTask);
+
+            var taskRemove = document.querySelector("#tasks");
+                      taskDone.setAttribute("id", id++);
+            taskRemove.appendChild(buttonTaskRemove);
+
+            buttonTaskRemove.onclick = function () {
+              taskLi.removeChild(taskRemove);
+            };
+          };
         };
       };
+
 
     };
   };

@@ -46,6 +46,8 @@ input{
   margin-right: 10%;
   margin-bottom: 20px;
   padding-left: 10px;
+  font-weight: 600;
+  outline:none;
 }
 
 ::placeholder{

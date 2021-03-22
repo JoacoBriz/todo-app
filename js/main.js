@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
       alert("Complete field");
 
     } else {
-      //New Task
-      let taskLi = document.querySelector("#taskLi");
-      taskLi.insertAdjacentHTML("beforeend", templateTask);
+      //Pending Task List 
+      let tasksPending = document.querySelector("#tasksPending");
+      tasksPending.insertAdjacentHTML("beforeend", templateTask);
 
       //Task item List
       var newTask = document.querySelector("#tasks");
@@ -46,10 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
       taskListPending.push(newTask);
       pendingAmount.textContent = taskListPending.length;
 
-      //Delete Task
+      //Remove Task
       function taskDone() {
-        taskLi.removeChild(newTask);
-
+        tasksPending.removeChild(newTask);
         if (taskDone){
           taskListPending = taskListPending.filter((i) => i !== newTask);
           pendingAmount.textContent = taskListPending.length;
@@ -58,46 +57,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
         //Move Task to Done Section
         function showTaskDone() {
-          let taskLiDone = document.querySelector("#doneTasks");
-          taskLiDone.insertAdjacentHTML("beforeend", templateTask);
+          // let id = 0;
+          let templateTaskDone = `
+          <li id="taskDone" class="task">
+            <p class="title">${titleTask}</p>
+          </li>
+          `
 
-          //Task item List
-          var taskDone = document.querySelector("#tasks");
-          taskDone.setAttribute("id", id++);
+          //Task Done List
+          let tasksDone = document.querySelector("#doneTasks");
+          tasksDone.insertAdjacentHTML("beforeend", templateTaskDone);
 
-          //Button Remove
-          const buttonTaskRemove = document.createElement("button");
-          buttonTaskRemove.classList.add('removeButton');
-          buttonTaskRemove.innerHTML = '<i class="far fa-trash-alt"></i>';
-          buttonTaskRemove.addEventListener("click", taskRemove);
+          // Task Done Item
+          let newTaskDone = document.querySelector("#taskDone");
+          // taskDone.setAttribute("id", id++);
 
-          taskDone.appendChild(buttonTaskRemove);
+          //Button Delete
+          const buttonTaskDelete = document.createElement("button");
+          buttonTaskDelete.classList.add('removeButton');
+          buttonTaskDelete.innerHTML = '<i class="far fa-trash-alt"></i>';
+          buttonTaskDelete.addEventListener("click", deleteTask);
 
-          function taskRemove() {
-            taskLiDone.removeChild(taskDone);
+          //Add button Delete
+          newTaskDone.appendChild(buttonTaskDelete);
+
+          //Delete Task
+          function deleteTask() {
+            tasksDone.removeChild(newTaskDone);
           };
-
+          
           //Button Return
           const buttonTaskReturn = document.createElement("button");
           buttonTaskReturn.classList.add('removeButton');
           buttonTaskReturn.innerHTML = '<i class="fas fa-undo-alt"></i>';
-          buttonTaskReturn.addEventListener("click", taskReturn);
+          buttonTaskReturn.addEventListener("click", returnTask);
 
-          taskDone.appendChild(buttonTaskReturn);
+          //Add button Return
+          newTaskDone.appendChild(buttonTaskReturn);
 
-          //Return Task to Pending Section
-          function taskReturn() {
-            taskLiDone.removeChild(taskDone);
-            let taskLi = document.querySelector("#taskLi");
-            taskLi.insertAdjacentHTML("beforeend", templateTask);
-
-            var taskRemove = document.querySelector("#tasks");
-                      taskDone.setAttribute("id", id++);
-            taskRemove.appendChild(buttonTaskRemove);
-
-            buttonTaskRemove.onclick = function () {
-              taskLi.removeChild(taskRemove);
-            };
+          //Return Task
+          function returnTask() {
+            tasksDone.removeChild(newTaskDone);
+            takeData();
           };
         };
       };
